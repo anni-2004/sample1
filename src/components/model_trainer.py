@@ -23,7 +23,7 @@ class ModelTrainer:
     def __init__(self):
         self.model_trainer_config=ModelTrainerConfig()
     
-    def initiate_model_trainer(self,train_array,test_array,preprocessor_path):
+    def initiate_model_trainer(self,train_array,test_array):
         try:
             logging.info("split training and test input data")
             X_train,y_train,X_test,y_test=(
@@ -34,10 +34,9 @@ class ModelTrainer:
             )
             models = {
                "Linear Regression": LinearRegression(),
-               "K-Neighbors Regressor": KNeighborsRegressor(),
                "Decision Tree": DecisionTreeRegressor(),
                "Random Forest Regressor": RandomForestRegressor(),
-               "XGBRegressor": XGBRegressor(), 
+               
                "AdaBoost Regressor": AdaBoostRegressor()
             }
             params={
@@ -46,7 +45,7 @@ class ModelTrainer:
                     # 'splitter':['best','random'],
                     # 'max_features':['sqrt','log2'],
                 },
-                "Random Forest":{
+                "Random Forest Regressor":{
                     # 'criterion':['squared_error', 'friedman_mse', 'absolute_error', 'poisson'],
                  
                     # 'max_features':['sqrt','log2',None],
@@ -54,10 +53,8 @@ class ModelTrainer:
                 },
                 
                 "Linear Regression":{},
-                "XGBRegressor":{
-                    'learning_rate':[.1,.01,.05,.001],
-                    'n_estimators': [8,16,32,64,128,256]
-                },
+                
+                
                 
                 "AdaBoost Regressor":{
                     'learning_rate':[.1,.01,0.5,.001],
